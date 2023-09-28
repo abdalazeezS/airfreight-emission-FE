@@ -5,14 +5,15 @@ import noResult from '../../assets/no-results.png';
 import ResultCard from '../../components/result-card/result-card.component';
 import { ITrip } from '../../types/index'
 import { isObjectEmpty } from '../../utilities';
-import './home.css';
 import { fetchAirlines, fetchDestinations, fetchOrigins, fetchTrips, fetchTripsWithQuery } from '../../services/api';
+import './home.css';
 
 const HomePage = () => {
   const [trips, setTrips] = useState<ITrip[]>([]);
   const [origins, setOrigins] = useState([]);
   const [destinations, setDestinations] = useState([]);
   const [airlines, setAirlines] = useState([]);
+  
   const [searchCriteria, setSearchCriteria] = useState({
     origin: '',
     destination: '',
@@ -33,12 +34,10 @@ const HomePage = () => {
       searchUrlParams.set('endDate', searchCriteria.endDate);
 
       setParams(searchUrlParams);
-      console.log(searchUrlParams.toString());
 
       const res = await fetchTripsWithQuery(searchUrlParams);
       const result = await res.json();
       setTrips(result);
-      console.log({ result });
     }
   }
   useEffect(() => {
