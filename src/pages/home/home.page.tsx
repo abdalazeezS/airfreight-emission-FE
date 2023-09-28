@@ -6,6 +6,7 @@ import ResultCard from '../../components/result-card/result-card.component';
 import { ITrip } from '../../types/index'
 import { isObjectEmpty } from '../../utilities';
 import './home.css';
+import { fetchAirlines, fetchDestinations, fetchOrigins, fetchTrips, fetchTripsWithQuery } from '../../services/api';
 
 const HomePage = () => {
   const [trips, setTrips] = useState<ITrip[]>([]);
@@ -34,17 +35,17 @@ const HomePage = () => {
       setParams(searchUrlParams);
       console.log(searchUrlParams.toString());
 
-      const res = await fetch(`http://localhost:3000/dev/trips?${searchUrlParams}`)
+      const res = await fetchTripsWithQuery(searchUrlParams);
       const result = await res.json();
       setTrips(result);
       console.log({ result });
     }
   }
   useEffect(() => {
-    fetch('http://localhost:3000/dev/trips').then(async res => setTrips(await res.json()));
-    fetch('http://localhost:3000/dev/origins').then(async res => setOrigins(await res.json()));
-    fetch('http://localhost:3000/dev/destinations').then(async res => setDestinations(await res.json()));
-    fetch('http://localhost:3000/dev/airlines').then(async res => setAirlines(await res.json()));
+    fetchTrips().then(res => setTrips(res));
+    fetchDestinations().then(res => setDestinations(res));
+    fetchOrigins().then(res => setOrigins(res));
+    fetchAirlines().then(res => setAirlines(res));
   }, []);
 
 
