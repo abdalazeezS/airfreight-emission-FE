@@ -54,10 +54,20 @@ const HomePage = () => {
     if (!cache[field]) {
       cache[field] = (prev: ITrip[]) => {
         return prev.sort((a, b) => {
-          if (type == 'AZ')
-            return (a[field] as string).toLowerCase().localeCompare((b[field] as string).toLowerCase())
-          else return (b[field] as string).toLowerCase().localeCompare((a[field] as string).toLowerCase())
-        })
+          const valueA = a[field] as string;
+          const valueB = b[field] as string;
+
+          if (field === 'date') {
+            const dateA = new Date(valueA.split('/').reverse().join('-')).getTime();
+            const dateB = new Date(valueB.split('/').reverse().join('-')).getTime();
+
+            return type === 'AZ' ? dateA - dateB : dateB - dateA;
+          }
+
+          return type === 'AZ'
+            ? valueA.localeCompare(valueB, undefined, { sensitivity: 'base' })
+            : valueB.localeCompare(valueA, undefined, { sensitivity: 'base' });
+        });
       };
     }
     return cache[field];
@@ -126,8 +136,8 @@ const HomePage = () => {
                 <li onClick={() => handleSort('ZA', 'destination')}>Destination Z to A</li>
                 <li onClick={() => handleSort('AZ', 'airline')}>Airline A to Z</li>
                 <li onClick={() => handleSort('ZA', 'airline')}>Airline Z to A</li>
-                <li>Date newest</li>
-                <li>Date oldest</li>
+                <li onClick={() => handleSort('AZ', 'date')}>Date newest</li>
+                <li onClick={() => handleSort('ZA', 'date')}>Date oldest</li>
               </ul>
             }
           </div>

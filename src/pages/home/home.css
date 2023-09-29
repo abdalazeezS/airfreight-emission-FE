@@ -47,7 +47,7 @@
 }
 
 .sort-container {
-  position: fixed;
+  position: static;
   align-self: flex-start;
   padding-right: 20px;
 }
