@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { useSearchParams } from 'react-router-dom';
-import noResult from '../../assets/no-results.png';
-import ResultCard from '../../components/result-card/result-card.component';
 import { ITrip } from '../../types/index'
 import { isObjectEmpty } from '../../utilities';
-import { fetchAirlines, fetchDestinations, fetchOrigins, fetchTrips, fetchTripsWithQuery } from '../../services/api';
+import api from '../../services/api';
 import { BsSortDown } from 'react-icons/bs';
+import { NoResult, ResultCard, Spinner } from '../../components';
 import './home.css';
-
+interface ITripState {
+  data: ITrip[];
+  isLoading: boolean;
+}
 const HomePage = () => {
-  const [trips, setTrips] = useState<ITrip[]>([]);
+  const [trips, setTrips] = useState<ITripState>({ data: [], isLoading: true });
   const [origins, setOrigins] = useState<string[]>([]);
   const [destinations, setDestinations] = useState([]);
   const [airlines, setAirlines] = useState([]);
@@ -36,16 +38,16 @@ const HomePage = () => {
 
       setParams(searchUrlParams);
 
-      const res = await fetchTripsWithQuery(searchUrlParams);
+      const res = await api.fetchTripsWithQuery(searchUrlParams);
       const result = await res.json();
       setTrips(result);
     }
   }
   useEffect(() => {
-    fetchTrips().then(res => setTrips(res));
-    fetchDestinations().then(res => setDestinations(res));
-    fetchOrigins().then(res => setOrigins(res));
-    fetchAirlines().then(res => setAirlines(res));
+    api.fetchTrips().then(res => setTrips({ data: res, isLoading: false }));
+    api.fetchDestinations().then(res => setDestinations(res));
+    api.fetchOrigins().then(res => setOrigins(res));
+    api.fetchAirlines().then(res => setAirlines(res));
   }, []);
 
   const memoSort = (type: string, field: string) => {
@@ -142,14 +144,13 @@ const HomePage = () => {
             }
           </div>
           {
-            trips.length == 0
-              ? <div className="empty-logo">
-                <img style={{ width: 100 }} src={noResult} alt="empty result" />
-                <span style={{ color: '#00000061' }}>Let's Begin the Search!</span>
-              </div>
-              : trips.map(trip =>
-                <ResultCard key={trip.id} trip={trip} />
-              )
+            trips.isLoading
+              ? <Spinner />
+              : trips.data && (trips.data.length == 0
+                ? <NoResult />
+                : trips.data.map(trip =>
+                  <ResultCard key={trip.id} trip={trip} />
+                ))
           }
         </Col>
       </Row>

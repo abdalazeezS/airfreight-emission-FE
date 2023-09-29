@@ -30,4 +30,4 @@ const fetchAirlines = async () => {
 }
 
 
-export { fetchDestinations, fetchTrips, fetchOrigins, fetchAirlines, fetchTripsWithQuery }
+export default { fetchDestinations, fetchTrips, fetchOrigins, fetchAirlines, fetchTripsWithQuery };
