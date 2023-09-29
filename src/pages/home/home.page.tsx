@@ -5,14 +5,11 @@ import { ITrip } from '../../types/index'
 import { isObjectEmpty } from '../../utilities';
 import api from '../../services/api';
 import { BsSortDown } from 'react-icons/bs';
-import { NoResult, ResultCard, Spinner } from '../../components';
+import { NoResult, ResultCard } from '../../components';
 import './home.css';
-interface ITripState {
-  data: ITrip[];
-  isLoading: boolean;
-}
+
 const HomePage = () => {
-  const [trips, setTrips] = useState<ITripState>({ data: [], isLoading: true });
+  const [trips, setTrips] = useState<ITrip[]>([]);
   const [origins, setOrigins] = useState<string[]>([]);
   const [destinations, setDestinations] = useState([]);
   const [airlines, setAirlines] = useState([]);
@@ -44,7 +41,7 @@ const HomePage = () => {
     }
   }
   useEffect(() => {
-    api.fetchTrips().then(res => setTrips({ data: res, isLoading: false }));
+    api.fetchTrips().then(res => setTrips(res));
     api.fetchDestinations().then(res => setDestinations(res));
     api.fetchOrigins().then(res => setOrigins(res));
     api.fetchAirlines().then(res => setAirlines(res));
@@ -144,13 +141,12 @@ const HomePage = () => {
             }
           </div>
           {
-            trips.isLoading
-              ? <Spinner />
-              : trips.data && (trips.data.length == 0
-                ? <NoResult />
-                : trips.data.map(trip =>
-                  <ResultCard key={trip.id} trip={trip} />
-                ))
+            trips && (trips.length == 0
+              ? <NoResult />
+              : trips.map(trip =>
+                <ResultCard key={trip.id} trip={trip} />
+              )
+            )
           }
         </Col>
       </Row>
