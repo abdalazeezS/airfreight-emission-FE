@@ -6,6 +6,7 @@ import ResultCard from '../../components/result-card/result-card.component';
 import { ITrip } from '../../types/index'
 import { isObjectEmpty } from '../../utilities';
 import { fetchAirlines, fetchDestinations, fetchOrigins, fetchTrips, fetchTripsWithQuery } from '../../services/api';
+import { BsSortDown } from 'react-icons/bs';
 import './home.css';
 
 const HomePage = () => {
@@ -13,7 +14,7 @@ const HomePage = () => {
   const [origins, setOrigins] = useState([]);
   const [destinations, setDestinations] = useState([]);
   const [airlines, setAirlines] = useState([]);
-  
+  const [isShown, setIsShown] = useState(false);
   const [searchCriteria, setSearchCriteria] = useState({
     origin: '',
     destination: '',
@@ -96,6 +97,21 @@ const HomePage = () => {
           </Form>
         </Col>
         <Col sm={9} className='result-section'>
+          <div className='sort-container'>
+            <Button onClick={() => setIsShown(!isShown)} variant='light' className='sort-button'><BsSortDown />sort</Button>
+            {
+              isShown && <ul className='sort-menu'>
+                <li>Origin A to Z</li>
+                <li>Origin Z to A</li>
+                <li>Destination A to Z</li>
+                <li>Destination Z to A</li>
+                <li>Airline A to Z</li>
+                <li>Airline Z to A</li>
+                <li>Date newest</li>
+                <li>Date oldest</li>
+              </ul>
+            }
+          </div>
           {
             trips.length == 0
               ? <div className="empty-logo">
