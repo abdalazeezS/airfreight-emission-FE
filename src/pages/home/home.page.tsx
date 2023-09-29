@@ -11,7 +11,7 @@ import './home.css';
 
 const HomePage = () => {
   const [trips, setTrips] = useState<ITrip[]>([]);
-  const [origins, setOrigins] = useState([]);
+  const [origins, setOrigins] = useState<string[]>([]);
   const [destinations, setDestinations] = useState([]);
   const [airlines, setAirlines] = useState([]);
   const [isShown, setIsShown] = useState(false);
@@ -48,6 +48,25 @@ const HomePage = () => {
     fetchAirlines().then(res => setAirlines(res));
   }, []);
 
+  const memoSort = (type: string, field: string) => {
+    const cache: any = {};
+
+    if (!cache[field]) {
+      cache[field] = (prev: ITrip[]) => {
+        return prev.sort((a, b) => {
+          if (type == 'AZ')
+            return (a[field] as string).toLowerCase().localeCompare((b[field] as string).toLowerCase())
+          else return (b[field] as string).toLowerCase().localeCompare((a[field] as string).toLowerCase())
+        })
+      };
+    }
+    return cache[field];
+  };
+
+  const handleSort = (type: string, field: string) => {
+    setTrips(memoSort(type, field));
+    setIsShown(false)
+  };
 
   return (
     <div className='home-page-wrapper'>
@@ -101,12 +120,12 @@ const HomePage = () => {
             <Button onClick={() => setIsShown(!isShown)} variant='light' className='sort-button'><BsSortDown />sort</Button>
             {
               isShown && <ul className='sort-menu'>
-                <li>Origin A to Z</li>
-                <li>Origin Z to A</li>
-                <li>Destination A to Z</li>
-                <li>Destination Z to A</li>
-                <li>Airline A to Z</li>
-                <li>Airline Z to A</li>
+                <li onClick={() => handleSort('AZ', 'origin')}>Origin A to Z</li>
+                <li onClick={() => handleSort('ZA', 'origin')}>Origin Z to A</li>
+                <li onClick={() => handleSort('AZ', 'destination')}>Destination A to Z</li>
+                <li onClick={() => handleSort('ZA', 'destination')}>Destination Z to A</li>
+                <li onClick={() => handleSort('AZ', 'airline')}>Airline A to Z</li>
+                <li onClick={() => handleSort('ZA', 'airline')}>Airline Z to A</li>
                 <li>Date newest</li>
                 <li>Date oldest</li>
               </ul>
