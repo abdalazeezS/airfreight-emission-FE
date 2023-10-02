@@ -7,4 +7,12 @@ interface ITrip {
   endDate: string,
 }
 
-export type { ITrip }
+interface ISearchCriteria {
+  origin: string;
+  destination: string;
+  airline: string;
+  startDate: string;
+  endDate: string;
+}
+
+export type { ITrip, ISearchCriteria }
