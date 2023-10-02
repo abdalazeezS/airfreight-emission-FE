@@ -5,7 +5,6 @@ interface ITrip {
   airline: string,
   startDate: string,
   endDate: string,
-  [key: string]: string | number;
 }
 
 export type { ITrip }
