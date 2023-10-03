@@ -41,12 +41,31 @@ body {
 }
 
 .emission-level {
-  background-color: #e0f2f1;
   text-align: center;
   border-radius: 4px;
   padding: 10px;
 }
 
-.emission-level strong {
+.green {
+  background-color: #e0f2f1;
+}
+
+.green strong {
   color: #009688;
+}
+
+.yellow {
+  background-color: rgba(250, 234, 214, 0.596)
+}
+
+.yellow strong {
+  color: #ffcc00;
+}
+
+.red {
+  background-color: #ffebcd;
+}
+
+.red strong {
+  color: #ff5733;
 }
