@@ -1,6 +1,6 @@
-import {  useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button, Col } from 'react-bootstrap'
-import {  sortTrips } from '../../store/trips-slice';
+import { sortTrips } from '../../store/trips-slice';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { NoResult, ResultCard, Spinner } from '..';
 import { BsSortDown } from 'react-icons/bs';
@@ -18,6 +18,18 @@ const Content = (props: IContentProps) => {
     dispatch(sortTrips({ type, field }));
     setIsShown(false)
   };
+  useEffect(() => {
+    const closeUlOnClickOutside = (event: any) => {
+      if (isShown && !(event.target as HTMLElement).closest('.sort-container')) {
+        setIsShown(false);
+      }
+    };
+
+    document.addEventListener('click', closeUlOnClickOutside);
+    return () => {
+      document.removeEventListener('click', closeUlOnClickOutside);
+    };
+  }, [isShown]);
   return (
     <Col sm={9} className='result-section'>
       <div className='sort-container'>

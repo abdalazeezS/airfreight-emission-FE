@@ -1,28 +1,24 @@
+import { ITrip } from '../../types';
 import './result-card.css';
 
-const ResultCard = ({ trip }: any) => {
-  var category = '';
-  if (trip.emission_level < 35) {
-    category = 'green';
-  } else if (trip.emission_level < 80) {
-    category = 'yellow';
-  } else {
-    category = 'red'
-  }
-  console.log(category);
+interface IResultCardProps {
+  trip: ITrip;
+}
+
+const ResultCard = (props: IResultCardProps) => {
   return (
     <div className="search-result-card">
       <div className="trip-details">
         <h2>Trip Details</h2>
-        <p><strong>id:</strong> {trip.id}</p>
-        <p><strong>Origin:</strong> {trip.origin}</p>
-        <p><strong>Destination:</strong> {trip.destination}</p>
-        <p><strong>Airline:</strong> {trip.airline}</p>
-        <p><strong>Date:</strong> {trip.date}</p>
+        <p><strong>id:</strong> {props.trip.id}</p>
+        <p><strong>Origin:</strong> {props.trip.origin}</p>
+        <p><strong>Destination:</strong> {props.trip.destination}</p>
+        <p><strong>Airline:</strong> {props.trip.airline}</p>
+        <p><strong>Date:</strong> {props.trip.date}</p>
       </div>
-      <div className={`emission-level ${category}`}>
+      <div className={`emission-level ${props.trip.emission_level_category}`}>
         <p><strong>Airfreight Emission level:</strong> <br />
-          {trip.emission_level} kg CO2</p>
+          {props.trip.emission_level} kg CO2</p>
       </div>
     </div >
   )
