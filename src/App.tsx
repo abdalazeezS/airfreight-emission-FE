@@ -3,7 +3,6 @@ import HomePage from './pages/home/home.page';
 import './App.css'
 
 function App() {
-
   return (
     <HomePage />
   )

@@ -1,26 +1,18 @@
-import { useEffect, useState } from 'react'
+import {  useState } from 'react'
 import { Button, Col } from 'react-bootstrap'
-import { setTrips, sortTrips } from '../../store/trips-slice';
+import {  sortTrips } from '../../store/trips-slice';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import { useGetAllTripsQuery } from '../../api/api';
-import { isObjectEmpty } from '../../utilities';
 import { NoResult, ResultCard, Spinner } from '..';
 import { BsSortDown } from 'react-icons/bs';
 
 interface IContentProps {
-  searchCriteria: Object,
-  params: string
+  isLoading: boolean
 }
 
 const Content = (props: IContentProps) => {
   const [isShown, setIsShown] = useState(false);
-  const dispatch = useAppDispatch();
   const trips = useAppSelector((state) => state.trips.data);
-
-  const { data, isLoading } = useGetAllTripsQuery(isObjectEmpty(props.searchCriteria) ? '' : props.params);
-  useEffect(() => {
-    dispatch(setTrips(data))
-  }, [data]);
+  const dispatch = useAppDispatch();
 
   const handleSort = (type: string, field: string) => {
     dispatch(sortTrips({ type, field }));
@@ -44,7 +36,7 @@ const Content = (props: IContentProps) => {
         }
       </div>
       {
-        isLoading
+        props.isLoading
           ? <Spinner />
           : trips && (trips.length == 0
             ? <NoResult />
