@@ -14,7 +14,7 @@ const sortArray = (arr: Array<any>, field: string, type: string) => {
       const dateA = new Date(valueA.split('/').reverse().join('-')).getTime();
       const dateB = new Date(valueB.split('/').reverse().join('-')).getTime();
 
-      return type === 'AZ' ? dateA - dateB : dateB - dateA;
+      return type === 'ZA' ? dateA - dateB : dateB - dateA;
     }
 
     return type === 'AZ'

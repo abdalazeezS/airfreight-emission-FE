@@ -3,11 +3,10 @@ import { Row } from 'react-bootstrap';
 import { useSearchParams } from 'react-router-dom';
 import { Content, SearchForm } from '../../components';
 import { ISearchCriteria } from '../../types';
-import './home.css';
 import { setTrips } from '../../store/trips-slice';
 import { useAppDispatch } from '../../store/store';
 import { useGetAllTripsQuery } from '../../api/api';
-import { isObjectEmpty } from '../../utilities';
+import './home.css';
 
 const HomePage = () => {
   const [params, setParams] = useSearchParams('');
@@ -19,11 +18,11 @@ const HomePage = () => {
     endDate: ''
   });
   const dispatch = useAppDispatch();
-  const { data, isLoading } = useGetAllTripsQuery(isObjectEmpty(searchCriteria) ? '' : params.toString());
-
+  const { data, isLoading } = useGetAllTripsQuery(params.toString());
   useEffect(() => {
     dispatch(setTrips(data))
   }, [data]);
+
   return (
     <div className='home-page-wrapper'>
       <h1>Airfreight Emission Levels</h1>
@@ -34,7 +33,7 @@ const HomePage = () => {
           params={params}
           setParams={setParams}
         />
-        <Content isLoading={isLoading} />
+        <Content isLoading={isLoading} params={params} setParams={setParams} />
       </Row>
     </div >
   )

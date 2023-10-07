@@ -1,6 +1,5 @@
 .sort-input {
   --bs-form-select-bg-img: none;
-  
 }
 
 .sort-menu,
@@ -15,10 +14,9 @@
 }
 
 .sort-filter-container {
-  /* position: absolute; */
   align-self: flex-start;
   padding-right: 20px;
-
+  
 }
 
 .sort-menu li,
