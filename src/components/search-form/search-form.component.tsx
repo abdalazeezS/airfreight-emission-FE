@@ -60,11 +60,11 @@ const SearchForm = (props: ISearchFormProps) => {
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label className="input-label">Start Date</Form.Label>
-          <Form.Control name='startDay' onChange={e => props.setSearchCriteria({ ...props.searchCriteria, startDate: e.target.value })} type="date" />
+          <Form.Control style={{ colorScheme: 'dark' }} name='startDay' onChange={e => props.setSearchCriteria({ ...props.searchCriteria, startDate: e.target.value })} type="date" />
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label className="input-label">End Date</Form.Label>
-          <Form.Control name='endDay' onChange={e => props.setSearchCriteria({ ...props.searchCriteria, endDate: e.target.value })} type="date" />
+          <Form.Control style={{ colorScheme: 'dark' }} name='endDay' onChange={e => props.setSearchCriteria({ ...props.searchCriteria, endDate: e.target.value })} type="date" />
         </Form.Group>
         <Form.Group className="mb-3" >
           <Button type='submit' style={{ width: '100%' }} variant="primary">Search</Button>

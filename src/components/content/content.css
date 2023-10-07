@@ -1,0 +1,42 @@
+.sort-input {
+  --bs-form-select-bg-img: none;
+  
+}
+
+.sort-menu,
+.filter-menu {
+  list-style-type: none;
+  background-color: white;
+  padding: 10px;
+  text-align: left;
+  width: max-content;
+  position: absolute;
+  border-radius: 6px;
+}
+
+.sort-filter-container {
+  /* position: absolute; */
+  align-self: flex-start;
+  padding-right: 20px;
+
+}
+
+.sort-menu li,
+.filter-menu li {
+  padding: 6px;
+  border-radius: 6px;
+  position: static;
+}
+
+.sort-menu li:hover,
+.filter-menu li:hover {
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+.sort-button,
+.filter-button {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
