@@ -1,4 +1,3 @@
-import React from 'react'
 import noResult from '../../assets/no-results.png';
 import './no-result.css';
 const NoResult = () => {

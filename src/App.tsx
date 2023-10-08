@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import HomePage from './pages/home/home.page';
 import './App.css'
+import { HomePage } from './pages';
 
 function App() {
   return (

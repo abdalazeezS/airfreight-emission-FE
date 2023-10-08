@@ -7,6 +7,7 @@ import { setTrips } from '../../store/trips-slice';
 import { useAppDispatch } from '../../store/store';
 import { useGetAllTripsQuery } from '../../api/api';
 import './home.css';
+import { ErrorPage } from '..';
 
 const HomePage = () => {
   const [params, setParams] = useSearchParams('');
@@ -18,24 +19,25 @@ const HomePage = () => {
     endDate: ''
   });
   const dispatch = useAppDispatch();
-  const { data, isLoading } = useGetAllTripsQuery(params.toString());
+  const { data, isLoading, isError } = useGetAllTripsQuery(params.toString());
   useEffect(() => {
     dispatch(setTrips(data))
   }, [data]);
 
   return (
-    <div className='home-page-wrapper'>
-      <h1>Airfreight Emission Levels</h1>
-      <Row>
-        <SearchForm
-          searchCriteria={searchCriteria}
-          setSearchCriteria={setSearchCriteria}
-          params={params}
-          setParams={setParams}
-        />
-        <Content isLoading={isLoading} params={params} setParams={setParams} />
-      </Row>
-    </div >
+    isError ? <ErrorPage /> :
+      <div className='home-page-wrapper'>
+        <h1>Airfreight Emission Levels</h1>
+        <Row>
+          <SearchForm
+            searchCriteria={searchCriteria}
+            setSearchCriteria={setSearchCriteria}
+            params={params}
+            setParams={setParams}
+          />
+          <Content isLoading={isLoading} params={params} setParams={setParams} />
+        </Row>
+      </div >
   )
 }
 
