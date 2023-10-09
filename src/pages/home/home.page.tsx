@@ -19,7 +19,9 @@ const HomePage = () => {
     endDate: ''
   });
   const dispatch = useAppDispatch();
-  const { data, isLoading, isError } = useGetAllTripsQuery(params.toString());
+  const { data, isLoading, isError } = useGetAllTripsQuery(params.toString(), {
+    refetchOnMountOrArgChange: true,
+  });
   useEffect(() => {
     dispatch(setTrips(data))
   }, [data]);

@@ -2,6 +2,19 @@
   --bs-form-select-bg-img: none;
 }
 
+.result-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 500px;
+}
+
+.data-actions-container {
+  width: 100%;
+  display: flex;
+  justify-content: 'flex-start'
+}
+
 .sort-menu,
 .filter-menu {
   list-style-type: none;
@@ -16,7 +29,6 @@
 .sort-filter-container {
   align-self: flex-start;
   padding-right: 20px;
-
 }
 
 .sort-menu li,

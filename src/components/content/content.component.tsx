@@ -22,11 +22,11 @@ const Content = (props: IContentProps) => {
           : trips && trips.length == 0
             ? <NoResult />
             : <>
-              <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-start' }}>
+              <div className='data-actions-container'>
                 <SortButton />
                 <FilterButton params={props.params} setParams={props.setParams} />
               </div>
-              <DataTable trips={trips} />
+              <DataTable trips={trips} params={props.params} setParams={props.setParams} />
             </>
       }
     </Col >

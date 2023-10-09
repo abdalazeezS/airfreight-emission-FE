@@ -9,15 +9,6 @@
   font-size: 36px;
 }
 
-.result-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 10px;
-  overflow: auto;
-  height: 500px;
-}
-
 .input-label {
   color: rgba(0, 0, 0, 0.66);
 }
