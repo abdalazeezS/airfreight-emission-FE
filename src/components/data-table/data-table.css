@@ -1,0 +1,34 @@
+.data-table {
+  margin-top: 16px;
+}
+
+.emission-level {
+  text-align: center;
+  border-radius: 4px;
+  padding: 10px;
+  --bs-table-bg-type: none !important;
+}
+
+.green {
+  background-color: #e0f2f1 !important;
+}
+
+.green strong {
+  color: #009688 !important;
+}
+
+.yellow {
+  background-color: rgba(250, 234, 214, 0.596) !important;
+}
+
+.yellow strong {
+  color: #af8c00 !important;
+}
+
+.red {
+  background-color: #ffebcd !important;
+}
+
+.red strong {
+  color: #ff5733 !important;
+}
