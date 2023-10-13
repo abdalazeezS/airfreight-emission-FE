@@ -17,7 +17,7 @@ const useFilter = (props: IUseFilterProps) => {
     const value = filterOptions.find(item => item.id === itemId)!.value;
     if (!isChecked) {
       if (props.params.get('q') == null)
-        props.params.set('q', value);
+        props.params.append('q', value);
       else
         props.params.append('q', value);
     } else {

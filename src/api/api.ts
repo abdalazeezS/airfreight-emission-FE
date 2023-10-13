@@ -7,7 +7,7 @@ export const api = createApi({
   endpoints: (builder) => ({
     getAllTrips: builder.query<ITrip[], string>({
       query: (q) => {
-        return q == '' ? 'trips/?p=1' : `trips/?${q}`
+        return q == '' ? 'trips' : `trips/?${q}`
       }
     }),
     getAllOrigins: builder.query<string[], void>({
