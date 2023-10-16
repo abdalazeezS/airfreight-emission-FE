@@ -1,7 +1,8 @@
-import { Button } from 'react-bootstrap'
+import { Dropdown } from 'react-bootstrap'
 import { BsFilter } from 'react-icons/bs'
 import useFilter from '../../hooks/filter.hook'
 import { SetURLSearchParams } from 'react-router-dom'
+import { CheckBoxListItem, CustomizedButton } from '../../design-system'
 
 interface IFilterButtonProps {
   params: URLSearchParams,
@@ -12,34 +13,23 @@ const FilterButton = (props: IFilterButtonProps) => {
   const { filterOptions, isShown, setIsShown, toggleCheckbox } = useFilter(props);
   return (
     <div className='sort-filter-container'>
-      <Button
+      <CustomizedButton
         onClick={() => setIsShown(!isShown)}
         variant='light'
-        className='filter-button'>
-        <BsFilter />filter
-      </Button>
-      {
-        isShown &&
-        <ul className='filter-menu'>
-          {
-            filterOptions.map((item) => (
-              <li
-                value={item.value}
-                style={{ display: 'flex', gap: 6, alignItems: 'center' }}
-                key={item.id}
-                onClick={() => toggleCheckbox(item.id)}
-              >
-                <input
-                  type="checkbox"
-                  checked={item.checked}
-                  onChange={() => { }}
-                />
-                {item.text}
-              </li>
-            ))
-          }
-        </ul>
-      }
+        prefixIcon={<BsFilter />}
+        text='filter'
+      />
+      <Dropdown.Menu show={isShown}>
+        {
+          filterOptions.map((item) =>
+            <CheckBoxListItem
+              key={item.id}
+              item={item}
+              onClick={toggleCheckbox}
+            />
+          )
+        }
+      </Dropdown.Menu>
     </div>
   )
 }

@@ -10,7 +10,7 @@ import './home.css';
 import { ErrorPage } from '..';
 
 const HomePage = () => {
-  const [params, setParams] = useSearchParams('p=1');
+  const [params, setParams] = useSearchParams('');
   const [searchCriteria, setSearchCriteria] = useState<ISearchCriteria>({
     origin: '',
     destination: '',
@@ -18,7 +18,7 @@ const HomePage = () => {
     startDate: '',
     endDate: ''
   });
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();[]
   const { data, isLoading, isError } = useGetAllTripsQuery(params.toString());
   useEffect(() => {
     dispatch(setTrips(data))
