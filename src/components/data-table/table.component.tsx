@@ -1,24 +1,20 @@
-import { Pagination, Table } from 'react-bootstrap'
-import { ITrip } from '../../types'
+import { Table } from 'react-bootstrap'
 import './data-table.css';
-import { useState } from 'react';
 import { SetURLSearchParams } from 'react-router-dom';
+import Pagination from '../pagination/pagination.component';
+import UsePagination from '../../hooks/pagination.hook';
+import { useAppSelector } from '../../store/store';
 
 interface IDataTableProps {
-  trips: ITrip[];
   params: URLSearchParams
   setParams: SetURLSearchParams
 }
 
 const DataTable = (props: IDataTableProps) => {
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const handleClick = (index: number) => {
-    setCurrentPage(index + 1);
-    props.params.set('p', (index + 1).toString());
-    props.setParams(props.params);
-  }
-
+  const { params, setParams } = props;
+  const trips = useAppSelector((state) => state.trips);
+  const totalRecords = trips.totalRecords;
+  const { currentPage, handlePageChange, totalPages } = UsePagination({ totalRecords, params, setParams });
   return (
     <>
       <Table className='data-table' striped bordered hover>
@@ -33,7 +29,7 @@ const DataTable = (props: IDataTableProps) => {
           </tr>
         </thead>
         <tbody>
-          {props.trips?.map(trip =>
+          {trips?.data?.map(trip =>
             <tr key={trip.id}>
               <td>{trip.id}</td>
               <td>{trip.origin}</td>
@@ -45,16 +41,10 @@ const DataTable = (props: IDataTableProps) => {
           )}
         </tbody>
       </Table>
-      <Pagination>
-        {
-          Array(3).fill(0).map((e, index) =>
-            <Pagination.Item key={index}
-              onClick={() => handleClick(index)}
-              active={index + 1 == currentPage}>{index + 1}
-            </Pagination.Item>
-          )
-        }
-      </Pagination>
+      <Pagination
+        pages={Array.from({ length: totalPages }, (_value, index) => index + 1)}
+        handlePageChange={handlePageChange}
+        currentPage={currentPage} />
     </>
   )
 }

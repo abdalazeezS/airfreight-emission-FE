@@ -10,7 +10,7 @@ interface IUsePaginationProps {
 const UsePagination = (props: IUsePaginationProps) => {
   const { params, setParams, totalRecords } = props;
   const pageSize = 10;
-  const [currentPage, setCurrentPage] = useState(params.get('p') || 1);
+  const [currentPage, setCurrentPage] = useState(Number(params.get('p')) || 1);
   const totalPages = Math.ceil(totalRecords / pageSize);
 
   const handlePageChange = (index: number) => {

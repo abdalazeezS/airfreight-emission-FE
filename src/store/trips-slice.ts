@@ -1,13 +1,11 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ITrip } from "../types";
+import { IGetTripsResponse } from "../types";
 import { sortArray } from "../utilities";
 
-interface ITripsState {
-  data: ITrip[];
-}
-
-const initialState: ITripsState = {
+const initialState: IGetTripsResponse = {
   data: [],
+  pageSize: 0,
+  totalRecords: 0
 }
 
 const tripsSlice = createSlice({
@@ -18,7 +16,10 @@ const tripsSlice = createSlice({
       return state;
     },
     setTrips: (state, action) => {
-      state.data = action.payload;
+      const { data, pageSize, totalRecords } = action.payload ?? {};
+      state.data = data;
+      state.pageSize = pageSize;
+      state.totalRecords = totalRecords;
     },
     sortTrips: (state, action: PayloadAction<{ field: string, type: string }>) => {
       const field = action.payload.field;
