@@ -16,4 +16,9 @@ interface ISearchCriteria {
   endDate: string;
 }
 
-export type { ITrip, ISearchCriteria }
+interface IGetTripsResponse {
+  data: ITrip[];
+  pageSize: number,
+  totalRecords: number
+}
+export type { ITrip, ISearchCriteria, IGetTripsResponse }
