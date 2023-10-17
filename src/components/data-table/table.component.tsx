@@ -50,8 +50,9 @@ const DataTable = (props: IDataTableProps) => {
         accessor: 'emission_level',
       },
       {
-        Header: 'Emission Level C',
+        Header: 'Emission Level Category',
         accessor: 'emission_level_category',
+        hidden: true,
       },
     ],
     []
@@ -68,6 +69,9 @@ const DataTable = (props: IDataTableProps) => {
     {
       columns,
       data: data ?? [],
+      initialState: {
+        hiddenColumns: ['emission_level_category']
+      }
     },
     useSortBy
   )
@@ -126,6 +130,12 @@ const DataTable = (props: IDataTableProps) => {
               return (
                 <tr {...row.getRowProps()}>
                   {row.cells.map((cell: Cell) => {
+                    console.log(cell.row)
+                    if (cell.column.id == 'emission_level') {
+                      return <td {...cell.getCellProps()} className={`emission-level ${row.values.emission_level_category}`}>
+                        <strong>{cell.render('Cell')}</strong>
+                      </td>
+                    }
                     return (
                       <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                     )
