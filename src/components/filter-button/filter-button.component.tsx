@@ -1,15 +1,10 @@
 import { Dropdown } from 'react-bootstrap'
 import { BsFilter } from 'react-icons/bs'
 import useFilter from '../../hooks/filter.hook'
-import { SetURLSearchParams } from 'react-router-dom'
 import { CheckBoxListItem, CustomizedButton } from '../../design-system'
+import { PropsTypes } from '../../types/props'
 
-interface IFilterButtonProps {
-  params: URLSearchParams,
-  setParams: SetURLSearchParams
-}
-
-const FilterButton = (props: IFilterButtonProps) => {
+const FilterButton = (props: PropsTypes.FilterButtonProps) => {
   const { filterOptions, isShown, setIsShown, toggleCheckbox } = useFilter(props);
   return (
     <div className='sort-filter-container'>

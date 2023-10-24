@@ -18,7 +18,7 @@ const HomePage = () => {
     startDate: '',
     endDate: ''
   });
-  const dispatch = useAppDispatch();[]
+  const dispatch = useAppDispatch();
   const { data, isLoading, isError } = useGetAllTripsQuery(params.toString());
   useEffect(() => {
     dispatch(setTrips(data))

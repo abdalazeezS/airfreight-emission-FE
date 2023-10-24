@@ -1,12 +1,7 @@
 import { Pagination } from 'react-bootstrap';
+import { PropsTypes } from '../../types/props';
 
-interface ITablePaginationProps {
-  pages: Array<number>;
-  handlePageChange: (index: number) => void;
-  currentPage: number;
-}
-
-const TablePagination = (props: ITablePaginationProps) => {
+const TablePagination = (props: PropsTypes.TablePaginationProps) => {
   const { currentPage, handlePageChange, pages } = props;
   return (
     <Pagination>

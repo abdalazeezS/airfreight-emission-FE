@@ -1,17 +1,9 @@
 import { Button, Col, Form } from 'react-bootstrap'
 import { useGetAllAirlinesQuery, useGetAllDestinationQuery, useGetAllOriginsQuery } from '../../api/api';
-import { SetURLSearchParams } from 'react-router-dom';
 import { isObjectEmpty } from '../../utilities';
-import { ISearchCriteria } from '../../types';
+import { PropsTypes } from '../../types/props';
 
-interface ISearchFormProps {
-  setSearchCriteria: (params: ISearchCriteria) => void
-  setParams: SetURLSearchParams
-  searchCriteria: ISearchCriteria
-  params: URLSearchParams
-}
-
-const SearchForm = (props: ISearchFormProps) => {
+const SearchForm = (props: PropsTypes.SearchFormProps) => {
   const { data: origins } = useGetAllOriginsQuery();
   const { data: destinations } = useGetAllDestinationQuery();
   const { data: airlines } = useGetAllAirlinesQuery();

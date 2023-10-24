@@ -1,13 +1,7 @@
-import { SetURLSearchParams } from 'react-router-dom';
 import { useState } from 'react'
+import { PropsTypes } from '../types/props';
 
-interface IUsePaginationProps {
-  totalRecords: number;
-  params: URLSearchParams;
-  setParams: SetURLSearchParams;
-}
-
-const UsePagination = (props: IUsePaginationProps) => {
+const UsePagination = (props: PropsTypes.UsePaginationProps) => {
   const { params, setParams, totalRecords } = props;
   const pageSize = 10;
   const [currentPage, setCurrentPage] = useState(Number(params.get('p')) || 1);

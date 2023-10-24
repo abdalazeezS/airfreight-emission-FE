@@ -1,9 +1,9 @@
 import { BsSortDown } from 'react-icons/bs'
 import { Dropdown } from 'react-bootstrap';
 import useSort from '../../hooks/sort.hook';
-import './sort.css';
 import { sortOptions } from '../../data';
 import { CustomizedButton, ListItem } from '../../design-system';
+import './sort.css';
 
 const SortButton = () => {
   const { handleSort, isShown, setIsShown } = useSort();

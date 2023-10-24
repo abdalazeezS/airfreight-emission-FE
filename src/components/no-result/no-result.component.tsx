@@ -1,5 +1,6 @@
 import noResult from '../../assets/no-results.png';
 import './no-result.css';
+
 const NoResult = () => {
   return (
     <div className="empty-logo">

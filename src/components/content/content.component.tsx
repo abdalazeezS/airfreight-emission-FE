@@ -1,16 +1,10 @@
 import { Col } from 'react-bootstrap'
 import { useAppSelector } from '../../store/store';
 import { DataTable, FilterButton, NoResult, SortButton, Spinner } from '..';
-import { SetURLSearchParams } from 'react-router-dom';
+import { PropsTypes } from '../../types/props';
 import './content.css';
 
-interface IContentProps {
-  isLoading: boolean
-  params: URLSearchParams
-  setParams: SetURLSearchParams
-}
-
-const Content = (props: IContentProps) => {
+const Content = (props: PropsTypes.ContentProps) => {
   const { isLoading, params, setParams } = props;
   const trips = useAppSelector((state) => state.trips.data);
   return (

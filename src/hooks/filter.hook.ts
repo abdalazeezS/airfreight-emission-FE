@@ -1,14 +1,9 @@
 import { useState } from 'react'
 import useToggleMenu from './toggle-menu.hook';
 import { filterOptionsList } from '../data';
-import { SetURLSearchParams } from 'react-router-dom';
+import { PropsTypes } from '../types/props';
 
-interface IUseFilterProps {
-  params: URLSearchParams,
-  setParams: SetURLSearchParams
-}
-
-const useFilter = (props: IUseFilterProps) => {
+const useFilter = (props: PropsTypes.UseFilterProps) => {
   const { params, setParams } = props;
   const { isShown, setIsShown } = useToggleMenu();
   const [filterOptions, setFilterOptions] = useState(filterOptionsList);
